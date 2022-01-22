@@ -1,6 +1,7 @@
 {
     "require": {
-        "fakerphp/faker": "^1.17"
+        "fakerphp/faker": "^1.17",
+        "codeception/lib-asserts": "^1.13"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
