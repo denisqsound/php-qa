@@ -1,0 +1,6 @@
+actor: ApiTester
+modules:
+    enabled:
+        - REST:
+              url: http://3.145.97.83:3333
+              depends: PhpBrowser
