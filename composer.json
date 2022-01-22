@@ -1,7 +1,6 @@
 {
     "require": {
-        "fakerphp/faker": "^1.17",
-        "guzzlehttp/guzzle": "^7.0"
+        "fakerphp/faker": "^1.17"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
