@@ -4,28 +4,35 @@ use Faker\Factory;
 
 class CreateUserCest
 {
+    protected $username;
+    protected $email;
+    protected $pass;
+
+    public function _before(ApiTester $I)
+    {
+        // Create fake data
+        $faker = Factory::create();
+        $this->username = $faker->firstNameMale() . strtotime("now");
+        $this->email = $faker->email();
+        $this->pass = $faker->password();
+    }
 
     public function CreateUser(ApiTester $I)
     {
 
-        // Create fake data
-        $faker = Factory::create();
-        $username = $faker->firstNameMale();
-        $email = $faker->email();
-        $pass = $faker->password();
-
         // make request
         $I->sendPost('/user/create', [
-            'username' => $username,
-            'email' => $email,
-            'password' => $pass,
+            'username' => $this->username,
+            'email' => $this->email,
+            'password' => $this->pass,
 
         ]);
 
         $I->seeResponseCodeIsSuccessful();
         $I->seeResponseIsJson();
         $I->seeResponseContains('"success":true');
-//        $I->seeResponseContains($username,$email,$pass,'qwe');
+        $I->seeResponseContainsJson(array('email' => $this->email));
+        $I->seeResponseContainsJson(array('username' => $this->username));
         $I->seeResponseMatchesJsonType([
             'success' => 'boolean',
             'details' => [
